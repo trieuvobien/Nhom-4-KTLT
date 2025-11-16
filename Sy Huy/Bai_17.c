@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <math.h>
 
 double Max_2_so (double a, double b) {
     double max = a;
