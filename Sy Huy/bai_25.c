@@ -1,16 +1,25 @@
 #include <stdio.h>
+#include <math.h>
 
-double giatri(double x, double y) {
-    return (x + y) * (x + y);
+
+double tinhGiaTri(double x, double a, int n) {
+    double result = pow(x + a, 2);
+    for (int i = 1; i < n; i++) {
+        result = result + pow(a, 2);
+    }
+    result = result + a;
+    return result;
 }
 
 int main() {
-    double x, a, n, result;
+    double x, a;
+    int n;
+
     printf("Nhap x, a va n: ");
-    scanf("%lf %lf %lf", &x, &a, &n);
-    if (n == 1) { printf("gia tri can tinh la: %lf", giatri(x, a) + a); }
-    else {
-        result = giatri(x, a) + (n - 1) * a * a + a;
-        printf("gia tri can tinh la: %lf", result);
-    }
+    scanf("%lf %lf %d", &x, &a, &n);
+
+    double ketQua = tinhGiaTri(x, a, n);
+    printf("Gia tri bieu thuc la: %.2lf\n", ketQua);
+
+    return 0;
 }
