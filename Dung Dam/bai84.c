@@ -64,7 +64,7 @@ double khu(float a[1000][1000], int n)
 	}
 	for (i = 1; i <= n; i++) 
         det *= a[i][i];
-    return det;
+    return det*dau;
 }
 
 int main()
@@ -76,6 +76,6 @@ int main()
 	printf("a) \n");
 	xuat(a,n);
 	printf("b) \n");
-	printf("%lf",khu(a,n));
+	printf("%.2lf",khu(a,n));
 	return 0;
 }
