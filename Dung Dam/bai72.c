@@ -4,7 +4,7 @@ int m,n,i,j,kq;
 
 int khu(float a[1000][1000], int m, int n) 
 {
-	int d,c,t,hang;
+	int d,c,t,hang,i,j;
 	float tam;
 	if(m>=n) hang=n;
 	else hang=m;
@@ -37,12 +37,12 @@ int khu(float a[1000][1000], int m, int n)
 		}
 		else
 		{
-			for(int i = 1; i <= m; i++)
+			for(i = 1; i <= m; i++)
 			{
                 if(i!=d) 
 				{
                     float tich = a[i][d] / a[d][d];
-                   		for(int j = 1; j <= n; j++)
+                   		for(j = 1; j <= n; j++)
                         	a[i][j] -= tich * a[d][j];
 				}
 			}
@@ -66,4 +66,5 @@ int main()
 	kq=khu(mt,m,n);
 	printf("%d",kq);
 	return 0;
+
 }
