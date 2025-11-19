@@ -5,6 +5,7 @@ float tong;
 
 void nhap(int n)
 {
+	int i,j;
 	for(i=1;i<=n;i++)
 		for(j=1;j<=n;j++)
 		{
@@ -14,6 +15,7 @@ void nhap(int n)
 }
 void xuat(float a[1000][1000],int n)
 {
+	int i,j;
 	for(i=1;i<=n;i++)
 	{
 		for(j=1;j<=n;j++)
@@ -39,4 +41,5 @@ int main()
 	xuat(a,n);
 	printf("Tong cac phan tu  nho nhat cua moi hang la: %f",tong);
 	return 0;
+
 }
