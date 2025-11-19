@@ -49,21 +49,16 @@ int main(){
     int a[n], b[m+n];
     nhap(a, n, 'A');
     nhap(b, m, 'B');
-    
     printf("Cac mang truoc khi noi:\n");
     xuat(a, n, 'A');
     xuat(b, m, 'B');
-    
-    // Kiểm tra tính tăng dần của mảng B
     if (tangdan(b, m)==0) {
         printf("Mang B khong tang dan. Khong the noi mang.\n");
         return 1;
     }
-    
     int m1=m;
     noimang(a, b, &m1, n);
     printf("Sau khi noi:\n");
     xuat(b, m1, 'B');
-    
     return 0;
 }
