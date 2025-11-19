@@ -15,9 +15,9 @@ void xuat(int a[], int n, char ten){
     printf("\n");
 }
 
-int kiemtragiamdan(int a[], int n){
-    for (int i=0;i<n-1;i++){
-        if (a[i] <= a[i+1]){
+int tangdan(int a[], int n){
+    for (int i=0; i<n-1; i++){
+        if (a[i] > a[i+1]){
             return 0;
         }
     }
@@ -54,8 +54,9 @@ int main(){
     xuat(a, n, 'A');
     xuat(b, m, 'B');
     
-    if (kiemtragiamdan(b, m)==0) {
-        printf("Mang B khong phai la mang giam dan. Khong the noi mang.\n");
+    // Kiểm tra tính tăng dần của mảng B
+    if (tangdan(b, m)==0) {
+        printf("Mang B khong tang dan. Khong the noi mang.\n");
         return 1;
     }
     
@@ -63,5 +64,6 @@ int main(){
     noimang(a, b, &m1, n);
     printf("Sau khi noi:\n");
     xuat(b, m1, 'B');
+    
     return 0;
 }
