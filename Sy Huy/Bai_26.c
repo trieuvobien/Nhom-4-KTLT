@@ -2,16 +2,22 @@
 #include <math.h>
 
 int main() {
-    double x,result;
-    printf("Nhap vao mot so thuc x: ");
+    double x;
+    printf("nhap vao so thuc x");
     scanf("%lf", &x);
-    double tu  = 1.0;
-    double mau = 1.0;
-    for (int n = 2 ; n <= 64; n = n + 2) {
-        tu = (x - n) * tu;
-        mau = (x - n - 1) * mau;
+    
+    double ketQua = 1.0;
+
+    for(int k = 1; k <= 32; k++) {
+        double tu = x - 2.0 * k;
+        double mau = x - 2.0 * k - 1.0;
+        
+        if(fabs(soLe) < 1e-12) {
+            printf("Mau so bang 0\n");
+            return 0;
+        }
+        ketQua *= tu / mau;
     }
-    result = tu / mau;
-    printf("Gia tri cua bieu thuc la: %.6lf\n", result);
+    printf("%.10f\n", ketQua);
     return 0;
 }
