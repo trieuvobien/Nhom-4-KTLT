@@ -1,32 +1,43 @@
 #include <stdio.h>
 
 int so_hoan_hao(int n) {
-    int tong = 0;
-    for (int i = 1; i < n; i++) {
-        if (n % i == 0) tong += i;
+    if (n <= 1) return 0;
+    int sum = 1;                             // 1 luôn là ước
+    for (int i = 2; i * i <= n; i++) {
+        if (n % i == 0) {
+            sum += i;
+            if (i != n / i) sum += n / i;
+        }
     }
-    return tong == n;
+    return sum == n;
 }
 
 int main() {
     int n;
-    printf("Nhap vao so nguyen n: ");
     scanf("%d", &n);
-    int a[n];
-    printf("Nhap vao %d so nguyen:\n", n);
-    for (int i = 0; i < n; i++) scanf("%d", &a[i]);
+    int a[100001];
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &a[i]);
+    }
 
-    printf("\ncau a:\n");
-    for (int i = 0; i < n; i++) printf(" %d", a[i]);
+    printf("cau a:\n");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", a[i]);
+    }
+    printf("\n");
 
-    printf("\ncau b:\n");
-    int j = 0;
+    printf("cau b:\n");
+    int cnt = 0;
     for (int i = 0; i < n; i++) {
         if (!so_hoan_hao(a[i])) {
-            a[j++] = a[i];
+            a[cnt++] = a[i];
         }
     }
-    for (int i = 0; i < j; i++) printf(" %d", a[i]);
+    for (int i = 0; i < cnt; i++) {
+        printf("%d ", a[i]);
+    }
+    if (cnt == 0) printf("\n");
+    else printf("\n");
 
     return 0;
 }
