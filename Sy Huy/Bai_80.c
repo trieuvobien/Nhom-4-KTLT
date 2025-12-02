@@ -21,7 +21,7 @@ int main() {
             }
         }
         
-        int cheo_phu = n - i - 1;  // cột của đường chéo phụ ở dòng i
+        int cheo_phu = n - i - 1;
         
         if (pos_max != cheo_phu) {
             long long tmp = a[i][pos_max];
