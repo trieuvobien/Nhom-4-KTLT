@@ -10,16 +10,16 @@ void removeComments(const char *inputFile, const char *outputFile) {
     }
 
     int c, prev = 0;
-    int state = 0; // 0: NORMAL, 1: IN_BLOCK_COMMENT, 2: IN_LINE_COMMENT
+    int state = 0;
 
     while ((c = fgetc(in)) != EOF) {
         if (state == 0) {
             if (prev == '/' && c == '*') {
-                state = 1; // bắt đầu chú thích khối
+                state = 1;
                 prev = 0;
                 continue;
             } else if (prev == '/' && c == '/') {
-                state = 2; // bắt đầu chú thích dòng
+                state = 2;
                 prev = 0;
                 continue;
             } else {
@@ -31,14 +31,14 @@ void removeComments(const char *inputFile, const char *outputFile) {
                     prev = 0;
                 }
             }
-        } else if (state == 1) { // IN_BLOCK_COMMENT
+        } else if (state == 1) {
             if (prev == '*' && c == '/') {
                 state = 0;
                 prev = 0;
             } else {
                 prev = (c == '*') ? '*' : 0;
             }
-        } else if (state == 2) { // IN_LINE_COMMENT
+        } else if (state == 2) {
             if (c == '\n') {
                 state = 0;
                 fputc('\n', out);
