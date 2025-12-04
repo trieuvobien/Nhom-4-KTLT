@@ -5,7 +5,7 @@ void removeComments(const char *inputFile, const char *outputFile) {
     FILE *in = fopen(inputFile, "r");
     FILE *out = fopen(outputFile, "w");
     if (!in || !out) {
-        printf("Không thể mở file!\n");
+        printf("Khong the mo file\n");
         return;
     }
 
@@ -53,6 +53,6 @@ void removeComments(const char *inputFile, const char *outputFile) {
 
 int main() {
     removeComments("input.c", "output.c");
-    printf("Đã xóa chú thích!\n");
+    printf("da xoa chu thich!\n");
     return 0;
 }
