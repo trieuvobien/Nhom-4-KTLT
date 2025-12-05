@@ -31,7 +31,7 @@ int main () {
         scanf("%d", &a[i]);
     }
     //cau a
-    printf("a) Xuat n:");
+    printf("a) Xuat mang:");
     for (int i = 0; i < n; i++) {
         printf("%d ", a[i]);
     }
@@ -43,4 +43,5 @@ int main () {
     bcnnmang(a, n);
     printf("c) BCNN cua mang la: %d\n", bcnnmang(a,n));
     return 0;
+
 }
