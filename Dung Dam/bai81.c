@@ -1,45 +1,43 @@
 #include<stdio.h>
-float a[1000][1000];
-int n,i,j;
-float tong;
-
-void nhap(int n)
+int n;
+void nhap(int n,float A[n][n])
 {
 	int i,j;
-	for(i=1;i<=n;i++)
-		for(j=1;j<=n;j++)
-		{
-			printf("A[%d][%d] = ", i, j);
-			scanf("%f",&a[i][j]);
-		}
+	for(i=0;i<n;i++)
+		for(j=0;j<n;j++)
+			scanf("%f",&A[i][j]);
 }
-void xuat(float a[1000][1000],int n)
+void xuat(int n,float A[n][n])
 {
 	int i,j;
-	for(i=1;i<=n;i++)
+	for(i=0;i<n;i++)
 	{
-		for(j=1;j<=n;j++)
-			printf("%8.2f ",a[i][j]);
+		for(j=0;j<n;j++)
+			printf("%.2f ",A[i][j]);
 		printf("\n");
 	}
+	
+}
+float dcp(int n,float A[n][n])
+{
+	float t=0;
+	int i,j;
+	for(i=0;i<n;i++)
+	{
+		float min=A[i][0];
+		for(j=1;j<n;j++)
+			if (A[i][j]<min) min=A[i][j];
+		A[i][j-i-1]=min;
+		t+=min;
+	}
+	return t;
 }
 int main()
 {
-	tong=0;
-	printf("Ma tran cap: ");
 	scanf("%d",&n);
-	nhap(n);
-	printf("a) \n");
-	xuat(a,n);
-	printf("b) \n");
-	for(i=1;i<=n;i++)
-	{
-		for(j=1;j<=n;j++)
-			if(a[i][j]<a[i][n+1-i]) a[i][n+1-i]=a[i][j];
-		tong+=a[i][n+1-i];
-	}
-	xuat(a,n);
-	printf("Tong cac phan tu  nho nhat cua moi hang la: %f",tong);
+	float A[n][n];
+	nhap(n,A);
+	xuat(n,A);
+	printf("%.2f",dcp(n,A));
 	return 0;
-
 }
