@@ -1,70 +1,78 @@
-#include<stdio.h>
-float mt[1000][1000];
-int m,n,i,j,kq;
+#include<stdio.h> 
+#include<stdbool.h> 
+int m,n; 
 
-int khu(float a[1000][1000], int m, int n) 
-{
-	int d,c,t,hang,i,j;
-	float tam;
-	if(m>=n) hang=n;
-	else hang=m;
-	for(d=1;d<=hang;d++)
-	{
-		if (a[d][d]==0)
-		{
-			t=1;
-			for(i=d+1;i<=m;i++)
-			{
-				if (a[i][d]!=0)
-				{
-					for(j=1;j<=n;j++)
-					{
-						tam=a[d][j];
-						a[d][j]=a[i][j];
-						a[i][j]=tam;
+void nhap(int m,int n,float A[m][n]) 
+{ 
+	int i,j; 
+	for(i=0;i<m;i++) 
+		for(j=0;j<n;j++) 
+			scanf("%f",&A[i][j]); 
+} 
+int khu(int m,int n,float A[m][n])  
+{ 
+	int d,i,j,hang; 
+	bool check; 	
+	float tam; 
+	for(d=0;(d<m)&&(d<n);d++) 
+	{ 
+		if (A[d][d]==0) 
+		{ 
+			check=false; 
+			for(i=d+1;i<m;i++) 
+			{ 
+				if (A[i][d]!=0) 
+				{ 
+					for(j=0;j<n;j++) 
+					{ 
+					tam=A[d][j]; 
+					A[d][j]=A[i][j]; 
+					A[i][j]=tam; 
 					}
-					t=0;
-					break;
+				check=true; 
+				break; 
 				}
 			}
-			if(t==1)
-			{
-				hang--;
-				for (i=1;i<=m;i++)
-					a[i][d]=a[i][hang];
+			if (check==true)  
+			{ 
+				d--; 
+				continue; 
 			}
-			d--;
 		}
-		else
+		else 
 		{
-			for(i = 1; i <= m; i++)
+			for(i=d+1;i<m;i++) 
 			{
-                if(i!=d) 
-				{
-                    float tich = a[i][d] / a[d][d];
-                   		for(j = 1; j <= n; j++)
-                        	a[i][j] -= tich * a[d][j];
-				}
+			    float tich=A[i][d]/A[d][d]; 
+			    for(j=d;j<n;j++) 	
+			        A[i][j]-=tich*A[d][j]; 
 			}
 		}
 	}
-	return hang;
-}
-
-int main()
-{
-	printf("So dong: ");
-	scanf("%d",&m);
-	printf("So cot: ");
-	scanf("%d",&n);
-	for(i=1;i<=m;i++)
-		for(j=1;j<=n;j++)
-		{
-			printf("A[%d][%d] = ", i, j);
-			scanf("%f",&mt[i][j]);
-		}
-	kq=khu(mt,m,n);
-	printf("%d",kq);
-	return 0;
-
-}
+	i=0; 
+	j=0; 
+	hang=0; 
+	while(i<m) 
+	{ 
+		while(j<n) 
+		{ 
+			if(A[i][j]!=0) 
+			{ 
+				hang++; 
+				j++; 
+				break; 
+			}
+			else j++; 
+		} 
+		i++; 
+	}
+	return hang; 
+} 
+int main() 
+{ 
+	scanf("%d %d",&m,&n); 
+	float A[m][n]; 
+	nhap(m,n,A); 
+	printf("%d",khu(m,n,A)); 
+	return 0; 
+} 
