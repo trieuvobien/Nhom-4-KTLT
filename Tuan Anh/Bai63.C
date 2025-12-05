@@ -37,6 +37,7 @@ int main() {
     nhap(a, n);
     //Cau a
     printf("a)");
+    printf("Xuat mang:");
     xuat(a, n);
     //Cau b
     printf("b)");
