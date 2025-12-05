@@ -1,81 +1,87 @@
 #include<stdio.h>
-float a[1000][1000];
-int n,i,j;
-float tong;
-
-void nhap(int n)
+#include<stdbool.h>
+int n;
+void nhap(int n,float A[n][n])
 {
 	int i,j;
-	for(i=1;i<=n;i++)
-		for(j=1;j<=n;j++)
-		{
-			printf("A[%d][%d] = ", i, j);
-			scanf("%f",&a[i][j]);
-		}
+	for(i=0;i<n;i++)
+		for(j=0;j<n;j++)
+			scanf("%f",&A[i][j]);
 }
-void xuat(float a[1000][1000],int n)
+void xuat(int n,float A[n][n])
 {
 	int i,j;
-	for(i=1;i<=n;i++)
+	for(i=0;i<n;i++)
 	{
-		for(j=1;j<=n;j++)
-			printf("%8.2f ",a[i][j]);
+		for(j=0;j<n;j++)
+			printf("%.2f ",A[i][j]);
 		printf("\n");
 	}
+	
 }
-double khu(float a[1000][1000], int n) 
+float det(int n,float A[n][n])
 {
-	int d,i,j;
-	float tam;
-	double det=1.0;
-	int dau=1;
-	for(d=1;d<=n;d++)
+	float t=0;
+	if(n==2)
 	{
-		if (a[d][d]==0)
+		t=A[0][0]*A[1][1]-A[0][1]*A[1][0];
+		return t;
+	}
+	if(n==3)
+	{
+		t=((A[0][0]*A[1][1]*A[2][2])+(A[0][1]*A[1][2]*A[2][0])+(A[0][2]*A[1][0]*A[2][1]))-((A[0][2]*A[1][1]*A[2][0])+(A[0][0]*A[1][2]*A[2][1])+(A[0][1]*A[1][0]*A[2][2]));
+		return t;
+	}
+	if(n==1) return A[0][0];
+	
+	int d,i,j;
+	int k=1;
+	bool check;
+	float tam;
+	for(d=0;d<n;d++)
+	{
+		if (A[d][d]==0)
 		{
-			int check=d;
-			for(i=d+1;i<=n;i++)
+			check=true;
+			for(i=d+1;i<n;i++)
 			{
-				if (a[i][d]!=0)
+				if (A[i][d]!=0)
 				{
-					check=i;
-					for(j=1;j<=n;j++)
+					for(j=0;j<n;j++)
 					{
-						tam=a[d][j];
-						a[d][j]=a[i][j];
-						a[i][j]=tam;
+						tam=A[d][j];
+						A[d][j]=A[i][j];
+						A[i][j]=tam;
 					}
-					dau=-dau;
+					k*=-1;
+					check=false;
 					break;
 				}
 			}
-			if(check==d) return 0.0;
-			d--;
+			if(check==true) return 0;
 		}
 		else
 		{
-			for(i = d+1; i <= n; i++)
+			for(i=d+1;i<n;i++)
 			{
-                float tich = a[i][d] / a[d][d];
-                for(j = d; j <= n; j++)
-                a[i][j] -= tich * a[d][j];
+                    float tich=A[i][d]/A[d][d];
+                   		for(j=d;j<n;j++)
+                        	A[i][j]-=tich*A[d][j];
 			}
 		}
 	}
-	for (i = 1; i <= n; i++) 
-        det *= a[i][i];
-    return det*dau;
+	t=1;
+	for(i=0;i<n;i++)
+		t*=A[i][i];
+	return t*k;
 }
 
 int main()
 {
-	tong=0;
-	printf("Ma tran cap: ");
 	scanf("%d",&n);
-	nhap(n);
-	printf("a) \n");
-	xuat(a,n);
-	printf("b) \n");
-	printf("%.2lf",khu(a,n));
+	float A[n][n];
+	nhap(n,A);
+	xuat(n,A);
+	printf("%.2f",det(n,A));
 	return 0;
 }
