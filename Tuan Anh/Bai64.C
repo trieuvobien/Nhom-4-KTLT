@@ -34,7 +34,7 @@ int main() {
     int a[n];
     nhap(a, n);
     //Cau a
-    printf("a)");
+    printf("a) Xuat mang:");
     xuat(a, n);
     //Cau b
     printf("b)");
